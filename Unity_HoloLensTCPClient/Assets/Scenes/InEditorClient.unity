@@ -1249,7 +1249,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1767769651}
         m_TargetAssemblyTypeName: TCPClient, Assembly-CSharp
-        m_MethodName: ConnectByUI
+        m_MethodName: StartConnect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
