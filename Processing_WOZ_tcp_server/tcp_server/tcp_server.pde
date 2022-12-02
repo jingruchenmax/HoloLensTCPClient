@@ -7,8 +7,8 @@ float yVal = 0;
 
 void setup() {
  
-  bg = loadImage("quilt-design.png");
-  size(1000, 1000);
+  bg = loadImage("cozychat.png");
+  size(800, 800);
   background(bg);
   textSize(24);
   // Starts a WoZServer on port 8888
