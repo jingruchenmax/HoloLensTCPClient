@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81dae1d46879b444aa9847f7961649f, type: 3}
+  m_Name: New MixedRealitySceneSystemProfile
+  m_EditorClassIdentifier: 
+  isCustomProfile: 1
+  useManagerScene: 1
+  managerScene:
+    Name: ManagerScene
+    Path: Assets/Scenes/ManagerScene.unity
+    Included: 0
+    BuildIndex: -1
+    Tag: Untagged
+    Asset: {fileID: 102900000, guid: 6a45a33c1dcd83f4ab3c06e2025e9cf8, type: 3}
+  useLightingScene: 0
+  defaultLightingSceneIndex: 0
+  lightingScenes:
+  - Name: 
+    Path: 
+    Included: 0
+    BuildIndex: -1
+    Tag: Untagged
+    Asset: {fileID: 0}
+  contentScenes:
+  - Name: HololensClient
+    Path: Assets/Scenes/HololensClient.unity
+    Included: 0
+    BuildIndex: -1
+    Tag: Untagged
+    Asset: {fileID: 102900000, guid: 481db002eb5c4d0418c4d5d5c9142792, type: 3}
+  - Name: WOZ-Location
+    Path: Assets/Scenes/WOZ-Location.unity
+    Included: 0
+    BuildIndex: -1
+    Tag: Untagged
+    Asset: {fileID: 102900000, guid: 9c5052ad05fb78b44a199a5dfc3c3f40, type: 3}
+  - Name: Main
+    Path: Assets/Scenes/Main.unity
+    Included: 0
+    BuildIndex: -1
+    Tag: Untagged
+    Asset: {fileID: 102900000, guid: 60136b0af747e9d459c02111e4e774a7, type: 3}
+  permittedLightingSceneComponentTypes:
+  - reference: UnityEngine.Transform, UnityEngine.CoreModule
+  - reference: UnityEngine.GameObject, UnityEngine.CoreModule
+  - reference: UnityEngine.Light, UnityEngine.CoreModule
+  - reference: UnityEngine.ReflectionProbe, UnityEngine.CoreModule
+  - reference: UnityEngine.LightProbeGroup, UnityEngine.CoreModule
+  - reference: UnityEngine.LightProbeProxyVolume, UnityEngine.CoreModule
+  contentTags: []
+  cachedLightingSettings:
+  - SceneName: 
+    RenderSettings:
+      Fog: 0
+      FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      FogMode: 2
+      FogDensity: 0.01
+      LinearFogStart: 0
+      LinearFogEnd: 300
+      AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+      AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+      AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+      AmbientLight: {r: 0, g: 0, b: 0, a: 0}
+      AmbientIntensity: 1
+      AmbientMode: 0
+      SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+      SkyboxMaterial: {fileID: 0}
+      DefaultReflectionMode: 0
+      DefaultReflectionResolution: 128
+      ReflectionBounces: 1
+      ReflectionIntensity: 1
+      CustomReflection: {fileID: 0}
+      UseRadianceAmbientProbe: 0
+    LightingSettings:
+      BounceScale: 1
+      IndirectOutputScale: 1
+      AlbedoBoost: 1
+      EnvironmentLightingMode: 0
+      EnableBakedLightmaps: 1
+      EnabledRealtimeLightmaps: 0
+    SunlightSettings:
+      UseSunlight: 1
+      Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+      Intensity: 1
+      XRotation: 50
+      YRotation: 330
+      ZRotation: 0
+  editorManageBuildSettings: 1
+  editorEnforceSceneOrder: 1
+  editorManageLoadedScenes: 1
+  editorEnforceLightingSceneTypes: 1
+  editorLightingCacheOutOfDate: 1

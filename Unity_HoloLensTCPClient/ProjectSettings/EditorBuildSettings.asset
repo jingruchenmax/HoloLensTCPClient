@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/ManagerScene.unity
+    guid: 6a45a33c1dcd83f4ab3c06e2025e9cf8
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 60136b0af747e9d459c02111e4e774a7
+  - enabled: 1
+    path: Assets/Scenes/WOZ-Location.unity
+    guid: 9c5052ad05fb78b44a199a5dfc3c3f40
+  - enabled: 1
+    path: Assets/Scenes/ManagerScene.unity
+    guid: 6a45a33c1dcd83f4ab3c06e2025e9cf8
+  - enabled: 1
     path: Assets/Scenes/HololensClient.unity
     guid: 481db002eb5c4d0418c4d5d5c9142792
   m_configObjects:
