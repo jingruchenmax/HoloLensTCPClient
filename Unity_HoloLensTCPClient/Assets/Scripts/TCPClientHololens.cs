@@ -1,7 +1,7 @@
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
 using TMPro;
-
+using UnityEngine.Events;
 
 
 public class TCPClientHololens : MonoBehaviour
@@ -9,8 +9,9 @@ public class TCPClientHololens : MonoBehaviour
     public MRTKTMPInputField ip_input;
     public MRTKTMPInputField port_input;
     public TextMeshProUGUI consoleText;
-    TCPClientReceiveOnly tCPClientReceiveOnly;
-
+    public TCPClientReceiveOnly tCPClientReceiveOnly;
+    public UnityEvent onMessageReceived;
+    public Vector2 message;
     private void Start()
     {
         tCPClientReceiveOnly = new TCPClientReceiveOnly();
@@ -28,6 +29,14 @@ public class TCPClientHololens : MonoBehaviour
         {
             //do something
             ShowData(tCPClientReceiveOnly.lastPacket);
+            //validate message
+            if (tCPClientReceiveOnly.lastPacket.Contains(","))
+            {
+                string[] temp = tCPClientReceiveOnly.lastPacket.Substring(1, tCPClientReceiveOnly.lastPacket.Length - 1).Split(',');
+                float.TryParse(temp[temp.Length - 2], out message.x);
+                float.TryParse(temp[temp.Length - 1], out message.y);
+                onMessageReceived.Invoke();
+            }
         }
     }
     private void ShowData(string data)

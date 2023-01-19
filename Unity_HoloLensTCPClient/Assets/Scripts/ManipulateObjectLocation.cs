@@ -12,10 +12,11 @@ public class ManipulateObjectLocation : MonoBehaviour
     public List<GameObject> vertex;
     Vector3 surfaceNormal;
     public GameObject manipuatedObject;
+    public TCPClientHololens tCPClientHololens;
     // Start is called before the first frame update
     void Start()
     {
-        SetToPlaygroundCenter();
+        SetToPlaygroundLeftTop();
     }
 
     void CalculateNormal()
@@ -35,15 +36,28 @@ public class ManipulateObjectLocation : MonoBehaviour
     public void SetToPlaygroundCenter()
     {
         CalculateNormal();
-        manipuatedObject.transform.position = (vertex[0].transform.position+vertex[2].transform.position)/2;
+        manipuatedObject.transform.localPosition = (vertex[0].transform.position+vertex[2].transform.position)/2;
+        manipuatedObject.transform.up = surfaceNormal;
+    }
+
+    public void SetToPlaygroundLeftTop()
+    {
+        CalculateNormal();
+        manipuatedObject.transform.localPosition = vertex[0].transform.position;
         manipuatedObject.transform.up = surfaceNormal;
     }
 
     public void SetLocation(Vector2 flatLocation)
     {
-        Vector3 i = vertex[1].transform.position - vertex[0].transform.position;
-        Vector3 j = vertex[3].transform.position - vertex[0].transform.position;
-        manipuatedObject.transform.position = i * flatLocation.x + j * flatLocation.y;
+        Vector3 i = vertex[1].transform.localPosition - vertex[0].transform.localPosition;
+        Vector3 j = vertex[3].transform.localPosition - vertex[0].transform.localPosition;
+        manipuatedObject.transform.localPosition = vertex[0].transform.localPosition + i * flatLocation.x + j * flatLocation.y;
         manipuatedObject.transform.up = surfaceNormal;
     }
+
+    public void SetLocationRaw()
+    {
+        SetLocation(tCPClientHololens.message);
+    }
+
 }

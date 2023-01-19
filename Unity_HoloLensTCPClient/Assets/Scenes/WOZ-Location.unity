@@ -773,7 +773,7 @@ Transform:
   m_Children:
   - {fileID: 383088326}
   m_Father: {fileID: 1143541107}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &153414975
 MonoBehaviour:
@@ -1764,7 +1764,7 @@ Transform:
   m_Children:
   - {fileID: 866031938}
   m_Father: {fileID: 1143541107}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &349455186
 MonoBehaviour:
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   rotateLerpTime: 0.000001
   scaleLerpTime: 0.000001
   enableConstraints: 1
-  constraintsManager: {fileID: 153414976}
+  constraintsManager: {fileID: 349455187}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -4357,7 +4357,7 @@ Transform:
   m_Children:
   - {fileID: 963989657}
   m_Father: {fileID: 1143541107}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789525860
 GameObject:
@@ -5682,7 +5682,7 @@ Transform:
   m_Children:
   - {fileID: 357599754}
   m_Father: {fileID: 1143541107}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &998508862
 MonoBehaviour:
@@ -5713,7 +5713,7 @@ MonoBehaviour:
   rotateLerpTime: 0.000001
   scaleLerpTime: 0.000001
   enableConstraints: 1
-  constraintsManager: {fileID: 153414976}
+  constraintsManager: {fileID: 998508863}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -7237,6 +7237,7 @@ MonoBehaviour:
   - {fileID: 153414969}
   - {fileID: 789493608}
   manipuatedObject: {fileID: 1815095616619299}
+  tCPClientHololens: {fileID: 1767769651}
 --- !u!4 &1143541107
 Transform:
   m_ObjectHideFlags: 0
@@ -7248,12 +7249,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4093690292516509}
   - {fileID: 998508861}
   - {fileID: 349455185}
   - {fileID: 153414974}
   - {fileID: 789493613}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1151320159
 GameObject:
@@ -9755,6 +9757,22 @@ MonoBehaviour:
   ip_input: {fileID: 1135268426}
   port_input: {fileID: 5911402714047746119}
   consoleText: {fileID: 1938317629}
+  onMessageReceived:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1143541106}
+        m_TargetAssemblyTypeName: ManipulateObjectLocation, Assembly-CSharp
+        m_MethodName: SetLocationRaw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  message: {x: 0, y: 0}
 --- !u!4 &1767769652
 Transform:
   m_ObjectHideFlags: 0
@@ -11858,13 +11876,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815095616619299}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.076, y: 0, z: 0.263}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_Children:
   - {fileID: 4793534785924653}
   - {fileID: 4005689884343249}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1143541107}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4793534785924653
 Transform:
@@ -12005,7 +12023,7 @@ BoxCollider:
   m_GameObject: {fileID: 1815095616619299}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.4645143, y: 2.253526, z: 2.0358305}
   m_Center: {x: 0.23581156, y: 1.0983852, z: -0.023423307}
