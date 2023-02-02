@@ -6,38 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/WelcomeScene.unity
+    path: Assets/SIM-Scene/0-SIMManagerScene.unity
+    guid: 06c9440f9ac676747b897e846c592b3f
+  - enabled: 1
+    path: Assets/SIM-Scene/1-WelcomeScene.unity
     guid: 24a687f70096f1f45a624871b3acec22
   - enabled: 1
-    path: Assets/HomeScene.unity
-    guid: 838c9bd3681c06245844a88561c62072
-  - enabled: 1
-    path: Assets/SettingsScene.unity
-    guid: debb98794a37efb49a4de47ed0eaca24
-  - enabled: 1
-    path: Assets/Scenes/HololensClient.unity
-    guid: 481db002eb5c4d0418c4d5d5c9142792
-  - enabled: 1
-    path: Assets/QuiltScene.unity
-    guid: e5657ad7172622b4e97004e35aff32e4
-  - enabled: 1
-    path: Assets/SetupComplete.unity
-    guid: de2fe5d73cf5b8b40b1359c69d6f336a
-  - enabled: 1
-    path: Assets/SetupScene.unity
+    path: Assets/SIM-Scene/2-SetupScene.unity
     guid: ddb1e8d40daad8f4c8f6657b66e8b035
   - enabled: 1
-    path: Assets/AssignmentScene.unity
-    guid: 0f439486e178a514684d65277af92cb0
+    path: Assets/SIM-Scene/3-HomeScene.unity
+    guid: 838c9bd3681c06245844a88561c62072
   - enabled: 1
-    path: Assets/GompeiScene.unity
-    guid: 25cc62a17da732c4eab07cbb6b8a96e9
-  - enabled: 1
-    path: Assets/VideoScene.unity
-    guid: 76df8b52a63f24e4fb98f0d2884e5766
-  - enabled: 1
-    path: Assets/RascalsScene.unity
-    guid: 6133e8601ae117e468fae970e1118898
+    path: Assets/SIM-Scene/4-QuiltScene.unity
+    guid: e5657ad7172622b4e97004e35aff32e4
   m_configObjects:
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2f3e7afdeafda3c40b2371f95315449b, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9606145d1d14ce44e9591e350ac8606f, type: 2}
+    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: ccfcc1c19beeb3e40b6ffecd226da296,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b42fdfb4301af6441ade275a99f57c43,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 1d0540d5a5e74fc469c4ce894f37a716,
+      type: 2}

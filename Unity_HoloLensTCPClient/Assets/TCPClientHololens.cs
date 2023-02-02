@@ -19,7 +19,7 @@ public class TCPClientHololens : MonoBehaviour
     System.Net.Sockets.TcpClient client;
     System.Net.Sockets.NetworkStream stream;
     private Task exchangeTask;
-
+    public int lastPacketToInt = -1;
     public void Start()
     {
 
@@ -72,6 +72,7 @@ public class TCPClientHololens : MonoBehaviour
         {
             //do something
             ShowData(lastPacket);
+            int.TryParse(lastPacket,out lastPacketToInt);
         }
     }
 
