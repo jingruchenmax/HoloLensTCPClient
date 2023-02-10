@@ -15,6 +15,8 @@ void setup() {
   WoZServer = new Server(this, 8888); 
 }
 
+void draw(){}
+
 void keyPressed() {
   WoZServer.write(key);
 }
