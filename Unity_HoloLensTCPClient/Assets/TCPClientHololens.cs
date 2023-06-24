@@ -9,7 +9,6 @@ using Microsoft.MixedReality.Toolkit.Experimental.UI;
 using TMPro;
 using System.Threading.Tasks;
 
-
 public class TCPClientHololens : MonoBehaviour
 {
     public MRTKTMPInputField ip_input;
@@ -22,26 +21,26 @@ public class TCPClientHololens : MonoBehaviour
     public int lastPacketToInt = -1;
     public void Start()
     {
-
+        
     }
 
     public void ConnectByUI()
     {
         ConnectUWP(ip_input.text, port_input.text);
-        
     }
 
     public void Connect(string host, string port)
     {
         ConnectUWP(host, port);
-        
     }
 
-    private void ConnectUWP(string host, string port)
+    private async void ConnectUWP(string host, string port)
     {
         try
         {
             client = new System.Net.Sockets.TcpClient(host, Int32.Parse(port));
+            Debug.Log("Socket built successfully");  // Alert when socket is built
+
             stream = client.GetStream();
             RestartExchange();
 
@@ -56,14 +55,11 @@ public class TCPClientHololens : MonoBehaviour
     private bool exchangeStopRequested = false;
     private string lastPacket = null;
 
-
     public void RestartExchange()
     {
-
-        if (exchangeTask != null) StopExchange();
+        if (exchangeTask != null) Task.Run(() => StopExchange());
         exchangeStopRequested = false;
         exchangeTask = Task.Run(() => ExchangePackets());
-       
     }
 
     public void Update()
@@ -72,7 +68,7 @@ public class TCPClientHololens : MonoBehaviour
         {
             //do something
             ShowData(lastPacket);
-            int.TryParse(lastPacket,out lastPacketToInt);
+            int.TryParse(lastPacket, out lastPacketToInt);
         }
     }
 
@@ -87,7 +83,6 @@ public class TCPClientHololens : MonoBehaviour
             {
                 recv = stream.Read(bytes, 0, client.ReceiveBufferSize);
                 received = Encoding.UTF8.GetString(bytes, 0, recv);
-                Debug.Log(received);
                 lastPacket = received;
             }
         }
@@ -104,20 +99,28 @@ public class TCPClientHololens : MonoBehaviour
         consoleText.text = data;
     }
 
-    public void StopExchange()
+    public async Task StopExchange()
     {
         exchangeStopRequested = true;
-        if (exchangeTask != null) {
-            exchangeTask.Wait();
+        if (exchangeTask != null)
+        {
+            await exchangeTask; // asynchronously wait for the task
+            Debug.Log("Socket closed successfully");  // Alert when socket is closed
             client.Dispose();
             exchangeTask = null;
         }
+    }
 
+    public void CloseConnection()
+    {
+        if (client != null)
+        {
+            Task.Run(() => StopExchange()); // run StopExchange asynchronously
+        }
     }
 
     public void OnDestroy()
     {
-        StopExchange();
+        Task.Run(() => StopExchange()); // run StopExchange asynchronously
     }
-
 }

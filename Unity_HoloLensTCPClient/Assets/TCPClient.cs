@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
 
-
 public class TCPClient : MonoBehaviour
 {
     public InputField ip_input;
@@ -16,20 +15,17 @@ public class TCPClient : MonoBehaviour
     System.Net.Sockets.TcpClient client;
     System.Net.Sockets.NetworkStream stream;
     private Task exchangeTask;
-
+    private CancellationTokenSource exchangeTokenSource;
 
     public void ConnectByUI()
     {
         ConnectUWP(ip_input.text, port_input.text);
-
     }
 
     public void Connect(string host, string port)
     {
         ConnectUWP(host, port);
-
     }
-
 
     private void ConnectUWP(string host, string port)
     {
@@ -38,53 +34,65 @@ public class TCPClient : MonoBehaviour
             client = new System.Net.Sockets.TcpClient(host, Int32.Parse(port));
             stream = client.GetStream();
             RestartExchange();
-
+            Debug.Log("Connected to server.");
         }
         catch (Exception e)
         {
-            // do something
-            Debug.Log(e.ToString());
+            Debug.LogError("Failed to connect: " + e.ToString());
         }
     }
 
-    private bool exchangeStopRequested = false;
     private string lastPacket = null;
-
-
 
     public void RestartExchange()
     {
+        if (exchangeTask != null)
+        {
+            StopExchange();
+        }
 
-        if (exchangeTask != null) StopExchange();
-        exchangeStopRequested = false;
-        exchangeTask = Task.Run(() => ExchangePackets());
-
+        exchangeTokenSource = new CancellationTokenSource();
+        CancellationToken token = exchangeTokenSource.Token;
+        exchangeTask = Task.Run(() => ExchangePackets(token));
     }
 
     public void LateUpdate()
     {
         if (lastPacket != null)
         {
-            //do something
             ShowData(lastPacket);
+            lastPacket = null;
         }
     }
 
-    public void ExchangePackets()
+    public void ExchangePackets(CancellationToken token)
     {
-        while (!exchangeStopRequested)
+        byte[] bytes = new byte[client.ReceiveBufferSize];
+
+        while (!token.IsCancellationRequested)
         {
-            string received = null;
-            byte[] bytes = new byte[client.ReceiveBufferSize];
-            int recv = 0;
-            while (true)
+            try
             {
-                recv = stream.Read(bytes, 0, client.ReceiveBufferSize);
-                received = Encoding.UTF8.GetString(bytes, 0, recv);
-             //   received = reader.ReadLine();
-                lastPacket = received;
+                int recv = stream.Read(bytes, 0, client.ReceiveBufferSize);
+                if (recv > 0)
+                {
+                    string received = Encoding.UTF8.GetString(bytes, 0, recv);
+                    lastPacket = received;
+                }
+            }
+            catch (IOException)
+            {
+                // Socket has been closed
+                break;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Failed to read data: " + e.ToString());
+                break;
             }
         }
+
+        Debug.Log("Socket closed.");
     }
 
     private void ShowData(string data)
@@ -92,30 +100,37 @@ public class TCPClient : MonoBehaviour
         if (data == null)
         {
             consoleText.text = "Received a frame but data was null";
-            return;
         }
-
-        consoleText.text = data;
+        else
+        {
+            consoleText.text = data;
+        }
     }
 
-
-
-    public void StopExchange()
+    public async void StopExchange()
     {
-        exchangeStopRequested = true;
-
-
-        if (exchangeTask != null)
+        if (exchangeTask != null && exchangeTask.Status == TaskStatus.Running)
         {
-            exchangeTask.Wait();
-            client.Dispose();
+            exchangeTokenSource.Cancel();
+            await exchangeTask;
+            exchangeTokenSource.Dispose();
             exchangeTask = null;
         }
-    }
 
+        if (client != null)
+        {
+            client.Close();
+            client = null;
+        }
+    }
     public void OnDestroy()
     {
         StopExchange();
     }
 
+    public void CloseConnection()
+    {
+        StopExchange();
+        Debug.Log("Manually closed the connection.");
+    }
 }
